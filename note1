@@ -1,0 +1,21 @@
+有一个仅包含’a’和’b’两种字符的字符串s，长度为n，每次操作可以把一个字符做一次转换（把一个’a’设置为’b’，或者把一个’b’置成’a’)；但是操作的次数有上限m，问在有限的操作数范围内，能够得到最大连续的相同字符的子串的长度是多少。
+如果要换‘b’，记录下所有‘b’的位置，选出包含m个b的最大长度。
+n,m=map(int,input().split())
+s=input()
+
+def func(letter):
+    c=[]
+    for i in range(n):
+        if s[i]==letter:
+            c.append(i)
+    c.append(n)
+    ans=0
+    if len(c)>m+1:
+        for i in range(m+1,len(c)):
+            ans=max(ans,c[i]-c[i-m-1]-1)
+    elif len(c)<=m+1:
+        ans=n
+    return ans
+print(max(func('a'),func('b')))
+    
+        
